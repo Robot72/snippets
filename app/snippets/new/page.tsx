@@ -23,14 +23,14 @@ export default function CreateNewSnippet() {
     }
     
     return (
-        <form action={createSnippet}>
+        <form className="flex flex-col gap-2" action={createSnippet}>
             <h2 className="font-bold m-3">Create New Snippet</h2>
 
             <div className="flex flex-col gap-4">
                 <div className="flex gap-4">
                     <label className="w-12" htmlFor="title">Title</label>
                     <input 
-                        className="border rounded p-4 w-full" 
+                        className="border rounded p-2 w-full" 
                         id="title" 
                         name="title" 
                     />
@@ -41,14 +41,14 @@ export default function CreateNewSnippet() {
                 <div className="flex gap-4">
                     <label className="w-12" htmlFor="code">Code</label>
                     <textarea 
-                        className="border rounded p-4 w-full" 
+                        className="border rounded p-2 w-full" 
                         id="code" 
                         name="code" 
                     />
                 </div>
             </div>
 
-            <button type="submit" className="rounder p-4 bg-blue-300 w-full">
+            <button type="submit" className="rounder p-2 bg-blue-300 w-full">
                 Create Snippet
             </button>
         </form>

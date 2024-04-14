@@ -10,7 +10,6 @@ interface SnippetShowPageProps {
 }
 
 export default async function editSnippetPage(props: SnippetShowPageProps) {
-  await new Promise((resolve) => setTimeout(resolve, 500))
   const id = parseInt(props.params.snippetId);
 
   const snippet = await db.snippet.findFirst({
@@ -20,7 +19,6 @@ export default async function editSnippetPage(props: SnippetShowPageProps) {
   if (!snippet) {
     return notFound();
   }
-  console.log('Snippet', snippet)
 
   const deleteSnippetAction = deleteSnippet.bind(null, id);
 

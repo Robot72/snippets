@@ -2,6 +2,7 @@
 
 import { db } from '@/db';
 import { redirect } from 'next/navigation';
+import { revalidatePath } from 'next/cache';
 
 export async function editSnippet(id: number, code: string) {
   await db.snippet.update({
@@ -9,6 +10,7 @@ export async function editSnippet(id: number, code: string) {
     data: { code }
   });
 
+  revalidatePath(`/snippets/${id}`);
   redirect(`/snippets/${id}`);
 }
 
@@ -17,6 +19,7 @@ export async function deleteSnippet(id: number) {
     where: { id }
   });
 
+  revalidatePath('/');
   redirect(`/`);
 }
 
@@ -30,10 +33,12 @@ export async function createSnippet(
 
     if (!title || !code) {
       formState.message = "Please fill out both fields";
+      return formState;
     }
 
     if (typeof title !== 'string' || typeof code !== 'string') {
       formState.message = "Invalid input";
+      return formState;
     }
 
     if (title.length > 100) {
@@ -64,5 +69,6 @@ export async function createSnippet(
     return error instanceof Error ? { message: error.message } : { message: 'An unknown error occurred' };
   }
 
+  revalidatePath('/');
   redirect('/');
 }
